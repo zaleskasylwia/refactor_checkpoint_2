@@ -12,3 +12,10 @@ class AddressBook:
             return self.addresses.append(address)
         else:
             raise TypeError
+
+    def find(self, search_phrase):
+        matching_addresses = []
+        for address in self.addresses:
+            if search_phrase.lower() in address.get_full_address().lower():
+                matching_addresses.append(address)
+        return matching_addresses
