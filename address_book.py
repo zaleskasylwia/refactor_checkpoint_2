@@ -19,3 +19,16 @@ class AddressBook:
             if search_phrase.lower() in address.get_full_address().lower():
                 matching_addresses.append(address)
         return matching_addresses
+
+    def sort(self):
+        sorted = False
+        length = len(self.addresses) - 1
+
+        while not sorted:
+            sorted = True
+            for address in range(length):
+                if self.addresses[address].get_full_address() > self.addresses[address + 1].get_full_address():
+                    sorted = False
+                    self.addresses[address], self.addresses[address + 1] = self.addresses[address + 1], self.addresses[address]
+
+        return (self.addresses)
