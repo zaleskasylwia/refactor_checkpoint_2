@@ -7,5 +7,4 @@ class WorkAddress(Address):
         self.company = company
 
     def get_full_address(self):
-        return super().get_full_address() + ", {}".format(self.company
-)
+        return super().get_full_address() + ", {}".format(self.company)
