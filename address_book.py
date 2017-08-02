@@ -32,3 +32,23 @@ class AddressBook:
                     self.addresses[address], self.addresses[address + 1] = self.addresses[address + 1], self.addresses[address]
 
         return (self.addresses)
+
+    @classmethod
+    def create_from_csv(cls, list_name, csv_path):
+        address_book = cls(list_name)
+
+        with open(csv_path, 'r') as address_data:
+            next(address_data)
+            lines = address_data.readlines()
+        table_with_addresses = [element.strip().split("\n") for element in lines]
+
+        for line in table_with_addresses:
+            if len(line) == 4:
+                address = Address(line[0], line[1], line[2], line[3])
+                address_book.add_address(address)
+
+            elif len(line) == 5:
+                address = WorkAddress(line[0], line[1], line[2], line[3], line[4])
+                address_book.add_address(address)
+
+        return address_book
