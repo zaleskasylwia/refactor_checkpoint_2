@@ -1,5 +1,6 @@
 from address import Address
 from work_address import WorkAddress
+import csv
 
 
 class AddressBook:
@@ -52,3 +53,28 @@ class AddressBook:
                 address_book.add_address(address)
 
         return address_book
+
+    def save_to_csv(self):
+        HEADERS = 'person,city,street,house_no,company'
+        list_to_save = []
+        for address in self.addresses:
+            if isinstance(address, WorkAddress):
+                work_address_list = [WorkAddress.person, WorkAddress.city, WorkAddress.street, WorkAddress.house_no, WorkAddress.company]
+                list_to_save.append(work_address_list)
+            else:
+                address_list = [Address.person, Address.city, Address.street, Address.house_no]
+                list_to_save.append(address_list)
+        string_to_save = "\n".join(list_to_save)
+
+        with open("{}.csv".format(self.name), 'w') as csvfile:
+            csvfile.write(HEADERS)
+            csvfile.write(string_to_save)
+
+'''        with open("{}.csv".format(self.name), 'w') as csvfile:
+            csvfile.write(HEADERS)
+
+            for a in self.addresses:
+                if isinstance(a, WorkAddress):
+                    csvfile.write(a.person, a.city, a.street, a.house_no, a.company)
+                else:
+                    csvfile.write(a.person, a.city, a.street, a.house_no)'''
