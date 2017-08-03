@@ -10,3 +10,9 @@ class Address:
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
+
+    def __ne__(self, other):
+        return not self == other
+
+    def __gt__(self, other):
+        return self.get_full_address() > other.get_full_address()
